@@ -11,6 +11,8 @@ import {
   persistReducer
 } from "redux-persist";
 
+import fetchUser from "../sagas/index";
+
 const rootPersistConfig = {
   key: "root",
   storage: AsyncStorage,
@@ -30,5 +32,6 @@ const store = createStore(
   )
 );
 
+sagaMiddleware.run(fetchUser)
 
 export {store};

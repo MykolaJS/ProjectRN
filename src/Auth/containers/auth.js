@@ -1,7 +1,7 @@
 import React from "React";
 import {connect} from "react-redux"
 import AuthComponent from "../components/auth";
-import {getStates} from "../actions";
+import { fetchUser } from "../actions";
 
 const Auth = props => <AuthComponent {...props} /> 
 
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getStates: () => dispatch(getStates()),
+		fetchUser: () => dispatch(fetchUser()),
 	}
 }
 
