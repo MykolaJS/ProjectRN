@@ -1,6 +1,6 @@
 const initialState = {
   user: {},
-  error: false,
+  error: "",
   loading: true
 }
 
@@ -17,14 +17,14 @@ const user = (state = initialState, action) => {
       return {
         user: action.data,
         loading: false,
-        error: false,
+        error: "",
       }
     }
     case "REQUEST_SET_USER_FAILED": {
       return {
         user: {},
         loading: false,
-        error: true,
+        error: action.error,
       }
     }
     default:

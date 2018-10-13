@@ -7,6 +7,7 @@ import {
 } from "react-native";
 
 const SingUp = props => {
+  console.log(props)
   return (
     <View style={{
       justifyContent: "center",

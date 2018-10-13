@@ -2,9 +2,10 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "react-navigation";
 
-import Auth from "./Auth/containers/auth"
-import AuthSignUp from "./Auth/components/authSignUp"
-import AuthSignIn from "./Auth/components/authSignIn"
+import Auth from "./Auth/containers/auth";
+import AuthSignUp from "./Auth/containers/authSignUp";
+import AuthSignIn from "./Auth/containers/authSignIn";
+import AuthCkeckEmail from "./Auth/components/authCheckEmail";
 
 class HomeScreen extends React.Component {
   render() {
@@ -35,6 +36,12 @@ export default createStackNavigator({
     screen: AuthSignIn,
     navigationOptions: {
       title: "Sign In"
+    }
+  },
+  CheckEmail: {
+    screen: AuthCkeckEmail,
+    navigationOptions: {
+      title: "CheckedEmail"
     }
   }
 });

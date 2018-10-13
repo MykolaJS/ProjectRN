@@ -11,10 +11,10 @@ class AuthMain extends Component {
   }
   render() {
     _redirectTo = scene => {
-      props.navigation.navigate(scene)
+      this.props.navigation.navigate(scene)
     }
 
-    this.props.fetchUser()
+    //this.props.fetchUser()
     return (
       <View style={{
         justifyContent: "center",
@@ -24,7 +24,7 @@ class AuthMain extends Component {
         <Button title="Sign Up" onPress={() => _redirectTo("AuthSignUp")} />
       </View>
     )
-  } 
+  }
 }
 
 
