@@ -7,6 +7,9 @@ import AuthSignUp from "./Auth/containers/authSignUp";
 import AuthSignIn from "./Auth/containers/authSignIn";
 import AuthCkeckEmail from "./Auth/components/authCheckEmail";
 
+import PistList from "./post/containers/postList";
+import PostCreate from "./post/containers/postCreate";
+
 class HomeScreen extends React.Component {
   render() {
     return (
@@ -43,5 +46,18 @@ export default createStackNavigator({
     navigationOptions: {
       title: "CheckedEmail"
     }
-  }
+  },
+  PistList: {
+    screen: PistList,
+    navigationOptions: {
+      title: "Post List",
+      headerLeft: null
+    },
+  },
+  PostCreate: {
+    screen: PostCreate,
+    navigationOptions: {
+      title: "Post Create"
+    },
+  },
 });

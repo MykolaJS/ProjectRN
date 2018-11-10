@@ -1,7 +1,7 @@
 import React from "React";
 import {connect} from "react-redux"
 import AuthSingInComponent from "../components/authSignIn";
-
+import { singIn } from "../../user/actions";
 const AuthSingIn = props => <AuthSingInComponent {...props} />
 
 const mapStateToProps = state => {
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUser: () => dispatch(fetchUser()),
+    singIn: (args, redirect) => dispatch(singIn(args, redirect)),
   }
 }
 

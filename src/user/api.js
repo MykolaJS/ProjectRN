@@ -1,26 +1,49 @@
 import { server } from "../constants";
+import fetchURL from "../helpers/fetch"; 
 
 export default class UserApi {
 
   static singUp(args) {
     const request = new Request(`${server}/api/singup`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "login": args.login,
+        "email": args.email,
         "password": args.password,
+        "name": args.name
       })
     });
 
-    return fetch(request).then(response => {
-      const { status } = response;
-      if (status === 200 || status === 201) return response.json();
-        return response.json().then(resp => {
-        const error = resp.message;
-        throw new Error(error)
-      })
-    })
+    return fetchURL(request)
   }
+
+  static singIn(args) {
+    const request = new Request(`${server}/api/singin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "email": args.email,
+        "password": args.password,
+      })
+    });
+    
+    return fetchURL(request)
+  }
+
+  static getCurrentUser(args) {
+    const request = new Request(`${server}/api/current-user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": args.token
+      },
+    });
+
+    return fetchURL(request)
+  }
+
 }

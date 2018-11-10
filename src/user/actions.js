@@ -1,19 +1,42 @@
-export const requestSetUser = () => ({
-  type: "REQUEST_SET_USER"
+export const requestSignUp = () => ({
+  type: "REQUEST_SIGN_UP"
 });
 
-export const requestSetUserSucceeded = data => ({
-  type: "REQUEST_SET_USER_SUCCEEDED",
+export const requestSignUpSucceeded = data => ({
+  type: "REQUEST_SIGN_UP_SUCCEEDED",
   data,
 });
 
-export const requestSetUserError = error => ({
-  type: "REQUEST_SET_USER_FAILED",
+export const requestSignUpError = error => ({
+  type: "REQUEST_SIGN_UP_FAILED",
   error
 });
 
-export const singUp = ({ login, password }) => ({
+export const singUp = ({ email, password, name }) => ({
   type: "SING_UP",
-  login,
-  password
+  email,
+  password,
+  name
+});
+
+export const requestSignIn = () => ({
+  type: "REQUEST_SIGN_IN"
+});
+
+export const requestSignInSucceeded = (data, token) => ({
+  type: "REQUEST_SIGN_IN_SUCCEEDED",
+  data,
+  token
+});
+
+export const requestSignInError = error => ({
+  type: "REQUEST_SIGN_IN_FAILED",
+  error
+});
+
+export const singIn = ({ email, password }, redirect) => ({
+  type: "SING_IN",
+  email,
+  password,
+  redirect
 })

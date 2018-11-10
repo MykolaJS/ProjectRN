@@ -6,15 +6,12 @@ import {
 } from "react-native";
 
 class AuthMain extends Component {
-  constructor() {
-    super()
-  }
+  
   render() {
     _redirectTo = scene => {
       this.props.navigation.navigate(scene)
     }
 
-    //this.props.fetchUser()
     return (
       <View style={{
         justifyContent: "center",

@@ -1,7 +1,8 @@
 import React from "react";
 import { Provider } from "react-redux";
 import Navigation from "./Navigator";
-import { store } from "./store";
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { store, persistor } from './store';
 
 import { YellowBox } from "react-native";
 YellowBox.ignoreWarnings(["Warning: isMounted(...) is deprecated", "Module RCTImageLoader"]);

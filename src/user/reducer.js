@@ -6,26 +6,16 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case "REQUEST_SET_DATA": {
-      return {
-        user: {},
+    case "REQUEST_SIGN_IN_SUCCEEDED": {
+      return Object.assign({}, state, {
+        user: { ...action.data, token: action.token },
         loading: false,
-        error: false,
-      }
+      })
     }
-    case "REQUEST_SET_USER_SUCCEEDED": {
-      return {
-        user: action.data,
-        loading: false,
-        error: "",
-      }
-    }
-    case "REQUEST_SET_USER_FAILED": {
-      return {
-        user: {},
-        loading: false,
+    case "REQUEST_SIGN_IN_FAILED": {
+      return Object.assign({}, state, {
         error: action.error,
-      }
+      })
     }
     default:
       return state;

@@ -11,12 +11,12 @@ import {
   persistReducer
 } from "redux-persist";
 
-import fetchUser from "../sagas/index";
+import mySaga from "../sagas/index";
 
 const rootPersistConfig = {
   key: "root",
   storage: AsyncStorage,
-  //whitelist: ["user", "OSDeviceId"]
+  //whitelist: ["user"]
   // debug: true
 };
 
@@ -25,13 +25,17 @@ const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const store = createStore(
-  persistedReducer,
+  rootReducer,
   applyMiddleware( 
     sagaMiddleware,
     logger,
   )
 );
 
-sagaMiddleware.run(fetchUser)
 
-export {store};
+const persistor = persistStore(store);
+
+sagaMiddleware.run(mySaga)
+
+export {store, persistor }
+

@@ -11,8 +11,9 @@ class SingUp extends PureComponent {
     super();
 
     this.state = {
-      login: "",
-      password: ""
+      email: "",
+      password: "",
+      name: ""
     }
   }
 
@@ -21,24 +22,33 @@ class SingUp extends PureComponent {
     }
 
   render() {
-    const { login, password } = this.state;
+    const { email, password, name } = this.state;
     return (
       <View style={{
         justifyContent: "center",
         flex: 1
       }}>
-        <Text>Login</Text>
+        <Text>Name</Text>
         <TextInput
-          onChangeText={(login) => {
+          onChangeText={name => {
             this.setState({
-              login: login
+              name: name
+            })
+          }}
+          style={{backgroundColor: "green"}}
+        />
+        <Text>email</Text>
+        <TextInput
+          onChangeText={email => {
+            this.setState({
+              email: email
             })
           }}
           style={{backgroundColor: "green"}}
         />
         <Text>Password</Text>
         <TextInput
-          onChangeText={(password) => {
+          onChangeText={password => {
             this.setState({
               password: password
             })
@@ -48,8 +58,9 @@ class SingUp extends PureComponent {
         <Button
           onPress={() => {
             this.props.singUp({
-              login: login,
-              password: password
+              email: email,
+              password: password,
+              name: name
             });
             this._redirectTo("CheckEmail");
           }}
