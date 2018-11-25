@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Video from 'react-native-video';
 import {
   View,
   Text,
@@ -28,12 +29,21 @@ class PostList extends Component {
 
   _renderItem(item) {
     return (
-      <View style={{backgroundColor: "#fff", margin: 5, padding: 5}}>
-        <TouchableOpacity>
-          <Text>
-            userId - {item.userId}
-          </Text>
-        </TouchableOpacity>
+      <View style={{ backgroundColor: "#fff", margin: 5, padding: 5 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <TouchableOpacity>
+            <Text>
+              userId - {item.userId}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.deletePost(item._id)}
+          >
+            <Text>
+              Delete Post
+            </Text>
+          </TouchableOpacity>
+          </View>
         <Text>
           {item.createAt}
         </Text>
@@ -53,7 +63,6 @@ class PostList extends Component {
     }
 
     const postList = [...this.props.posts.values()]; 
-    console.log(postList)
     return (
       <FlatList
         data={postList}

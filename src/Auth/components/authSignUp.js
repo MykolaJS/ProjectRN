@@ -35,7 +35,6 @@ class SingUp extends PureComponent {
               name: name
             })
           }}
-          style={{backgroundColor: "green"}}
         />
         <Text>email</Text>
         <TextInput
@@ -43,8 +42,7 @@ class SingUp extends PureComponent {
             this.setState({
               email: email
             })
-          }}
-          style={{backgroundColor: "green"}}
+          }} 
         />
         <Text>Password</Text>
         <TextInput
@@ -53,7 +51,6 @@ class SingUp extends PureComponent {
               password: password
             })
           }}
-          style={{backgroundColor: "green"}}
         />
         <Button
           onPress={() => {

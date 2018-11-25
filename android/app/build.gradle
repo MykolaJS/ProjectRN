@@ -140,6 +140,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-video')
+    implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
+    implementation project(':react-native-fbsdk')
+    compile project(':react-native-fbsdk')
     compile project(':react-native-onesignal')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

@@ -5,6 +5,7 @@ import {
   Button,
   TextInput
 } from "react-native";
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 class SingUp extends Component {
   constructor() {
@@ -20,7 +21,6 @@ class SingUp extends Component {
     }
 
   render() {
-
      return (
       <View style={{
         justifyContent: "center",
@@ -42,6 +42,23 @@ class SingUp extends Component {
           onPress={() => this.props.singIn(this.state, this._redirect.bind())}
           title="Sing In"
         />
+        <LoginButton
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                console.log("login has error: " + error);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
       </View>
     )
   }
