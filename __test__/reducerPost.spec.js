@@ -10,5 +10,4 @@ describe("actions setPost", () => {
 		const create = postCreate("title", "body");
 		expect(create).toEqual({type: "POST_CREATE", title: "title", body: "body"}) 
 	})
-	it("ACTION - ")
 })

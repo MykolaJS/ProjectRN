@@ -13,7 +13,9 @@ class AuthMain extends Component {
     }
 
     return (
-      <View style={{
+      <View 
+      testID="welcome"
+      style={{
         justifyContent: "center",
         flex: 1
       }}>
