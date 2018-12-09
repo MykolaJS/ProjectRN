@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import Share, { ShareSheet } from 'react-native-share';
 
 class PostList extends Component {
  
@@ -33,16 +34,19 @@ class PostList extends Component {
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity>
             <Text>
-              userId - {item.userId}
+              userId - {item.name}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.deletePost(item._id)}
-          >
-            <Text>
-              Delete Post
-            </Text>
-          </TouchableOpacity>
+          { item.userId === this.props.currentUserId ?
+            <TouchableOpacity
+              onPress={() => this.props.deletePost(item._id)}
+            >
+              <Text>
+                Delete Post
+              </Text>
+            </TouchableOpacity>
+            : null
+          }
           </View>
         <Text>
           {item.createAt}
@@ -53,6 +57,13 @@ class PostList extends Component {
         <Text>
           {item.body}
         </Text>
+        <Button
+          title="Shared"
+          onPress={() => Share.open({
+            title: item.title,
+            message: item.body,
+          })}
+        />
       </View>
     )
   }
@@ -67,7 +78,7 @@ class PostList extends Component {
       <FlatList
         data={postList}
         renderItem={({ item }) => this._renderItem(item)}
-        keyExtractor={(item) => item._id }
+        keyExtractor={item => item._id }
         ListHeaderComponent={this.renderHeader()}
       />
     )

@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
 import OneSignal from 'react-native-onesignal'; 
 
 import Auth from "./Auth/containers/auth";
 import AuthSignUp from "./Auth/containers/authSignUp";
 import AuthSignIn from "./Auth/containers/authSignIn";
 import AuthCkeckEmail from "./Auth/components/authCheckEmail";
+import LogOut from "./Auth/containers/logOut"
 
 import PistList from "./post/containers/postList";
 import PostCreate from "./post/containers/postCreate";
@@ -25,6 +26,7 @@ class HomeScreen extends React.Component {
 
 class AppNavigator extends React.Component {
   constructor(properties) {
+    console.log(properties)
   super(properties);
     OneSignal.init("3732f321-f09f-4b83-b524-d77567d9a98e");
     OneSignal.addEventListener('received', this.onReceived);
@@ -48,6 +50,20 @@ class AppNavigator extends React.Component {
       )
   }
 }
+
+
+const TabNavigator = createBottomTabNavigator({
+    PostList: {
+      screen: PistList,
+      navigationOptions: {
+      
+      }
+    },
+    LogOut: LogOut,
+    MyPosts: HomeScreen
+  },
+
+);
 
 
 const Navigator = createStackNavigator({
@@ -76,7 +92,7 @@ const Navigator = createStackNavigator({
     }
   },
   PistList: {
-    screen: PistList,
+    screen: TabNavigator,
     navigationOptions: {
       title: "Post List",
       headerLeft: null

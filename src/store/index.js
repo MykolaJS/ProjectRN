@@ -16,8 +16,8 @@ import mySaga from "../sagas/index";
 const rootPersistConfig = {
   key: "root",
   storage: AsyncStorage,
-  //whitelist: ["user"]
-  // debug: true
+  whitelist: ["user"],
+  debug: true
 };
 
 
@@ -25,7 +25,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   applyMiddleware( 
     sagaMiddleware,
     logger,

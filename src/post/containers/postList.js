@@ -12,7 +12,8 @@ const PostList = props => <PostListComponent {...props} />
 
 const mapStateToProps = state => {
 	return {
-		posts: state.post.list
+		posts: state.post.list,
+		currentUserId: state.user.user._id
 	}
 }
 

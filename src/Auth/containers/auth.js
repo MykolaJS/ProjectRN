@@ -6,7 +6,7 @@ const Auth = props => <AuthComponent {...props} />
 
 const mapStateToProps = state => {
 	return {
-		state: state
+		state: state.user
 	}
 }
 

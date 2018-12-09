@@ -7,6 +7,12 @@ import {
 import OneSignal from 'react-native-onesignal'; 
 
 class AuthMain extends Component {
+  componentDidMount() {
+    if(Object.keys(this.props.state.user).length) {
+      this.props.navigation.navigate("PostList")
+    }
+  }
+
   render() {
     _redirectTo = scene => {
       this.props.navigation.navigate(scene)

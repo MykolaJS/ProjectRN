@@ -8,7 +8,7 @@ const post = (state = initialState, action) => {
       return Object.assign({}, state, {
         list: new Map([...state.list, ...action.data ])
       })
-    }
+    } break;
     case "REQUEST_GET_POSTS_ERROR": {
       return Object.assign({}, state, {
         error: action.error,
