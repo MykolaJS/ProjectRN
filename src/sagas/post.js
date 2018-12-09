@@ -8,7 +8,9 @@ import {
 
 import {
  setPosts,
- setPostInList
+ setPostInList,
+ requestGetPostsError,
+ deletePostSuccess
 } from "../post/actions";
 
 import postApi from "../post/api";
@@ -37,22 +39,37 @@ function* postCreate(actions) {
     const { token } = state.user.user
     const response = yield call(postApi.postCreate, {
     	title: actions.title,
-    	url:  Math.random().toString(36).substring(2, 15),
     	body: actions.body,
-      	token: token
+      token: token
     }); 
     const data = new Map();
-    data.set(response.id, response)  
+    data.set(response._id, response)  
     yield put(setPostInList(data));
  
   } catch (error) {
-     console.log(error, "eeeee")
+     console.log(error)
   }
 };
 
+function* deltePost(actions) {
+  try {
+    const state = yield select();
+    const { token } = state.user.user;
+
+    yield call(postApi.deletePost, { 
+      postId: actions.postId,  
+      token
+    })
+    yield put(deletePostSuccess(actions.postId))
+  } catch (error) {
+    console.log(error, "error");
+  }
+}
+
 function* postSaga() {
 	yield takeEvery("POST_CREATE", postCreate);
-   	yield takeEvery("GET_POSTS", requestGetPostsAsync);
+  yield takeEvery("GET_POSTS", requestGetPostsAsync);
+  yield takeEvery("DELETE_POST", deltePost);
 };
 
 export default postSaga;

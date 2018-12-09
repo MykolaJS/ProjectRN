@@ -8,15 +8,22 @@ const post = (state = initialState, action) => {
       return Object.assign({}, state, {
         list: new Map([...state.list, ...action.data ])
       })
-    }
+    } break;
     case "REQUEST_GET_POSTS_ERROR": {
       return Object.assign({}, state, {
         error: action.error,
       })
     }
+    case "DELETE_POST_SUCCESS": {
+      state.list.delete(action.postId);
+
+      return Object.assign({}, state, {
+        list: new Map([...state.list])
+      })
+    }
     case "SET_POST_IN_LIST": {
       return Object.assign({}, state, {
-        list: new Map([...state.list, ...action.data ])
+        list: new Map([...action.data, ...state.list])
       })
     }
     default:

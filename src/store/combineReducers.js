@@ -7,5 +7,9 @@ const appReducer = combineReducers({
 	post
 });
 
+const rootReducer = (state, action) => (
+  appReducer(action.type === "LOG_OUT" ? appReducer({}, {}) : state, action)
+)
 
-export default appReducer;
+
+export default rootReducer;

@@ -6,7 +6,7 @@ const AuthSingIn = props => <AuthSingInComponent {...props} />
 
 const mapStateToProps = state => {
   return {
-    state: state
+    user: state.user
   }
 }
 

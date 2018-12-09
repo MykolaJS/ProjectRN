@@ -1,7 +1,10 @@
 import React from "React";
 import {connect} from "react-redux"
 
-import { getPosts } from "../actions"
+import { 
+	getPosts,
+	deletePost 
+} from "../actions"
 import PostListComponent from "../components/postList";
 
 
@@ -9,13 +12,15 @@ const PostList = props => <PostListComponent {...props} />
 
 const mapStateToProps = state => {
 	return {
-		posts: state.post.list
+		posts: state.post.list,
+		currentUserId: state.user.user._id
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getPosts: () => dispatch(getPosts())
+		getPosts: () => dispatch(getPosts()),
+		deletePost: postId => dispatch(deletePost(postId))
 	}
 }
 

@@ -21,18 +21,18 @@ class PostCreate extends Component {
     const { body, title } = this.state;
     return (
       <View style={{backgroundColor: "#fff", margin: 5, padding: 5}}>
-          <Text>
-            Title
-          </Text>
-          <TextInput
-            onChangeText={title => this.setState({ title: title })}
-          />
-          <Text>
-            Description
-          </Text>
-          <TextInput
-            onChangeText={body => this.setState({ body: body })}
-          />  
+        <Text>
+          Title
+        </Text>
+        <TextInput
+          onChangeText={title => this.setState({ title: title })}
+        />
+        <Text>
+          Description
+        </Text>
+        <TextInput
+          onChangeText={body => this.setState({ body: body })}
+        />  
         <Button
           onPress={() => this.props.postCreate(title, body)}
           title="Create Post"

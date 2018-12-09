@@ -11,7 +11,10 @@ YellowBox.ignoreWarnings(["Remote debugger is in a background tab which may caus
 const App = () => {
   return (
    	<Provider store={store}>
-   		<Navigation />
+   		<PersistGate
+          persistor={persistor}>
+   			<Navigation />
+   		</PersistGate>
    	</Provider>
   )
 }

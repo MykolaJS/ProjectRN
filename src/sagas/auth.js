@@ -5,6 +5,7 @@ import {
   put,
   takeEvery,
   takeLatest,
+  select
 } from "redux-saga/effects";
 
 import {
@@ -22,7 +23,6 @@ import userApi from "../user/api";
 
 function* requestSignUpAsync(actions) {
   try {
-    const state = yield select();
     yield put(requestSignUp());
     const data = yield call(userApi.singUp, {
       password: actions.password,
@@ -54,6 +54,7 @@ function* requestSignInAsync(actions) {
     yield put(requestSignInError(error));
   }
 };
+
 
 function* authSaga() {
    yield takeEvery("SING_UP", requestSignUpAsync);

@@ -39,4 +39,8 @@ export const singIn = ({ email, password }, redirect) => ({
   email,
   password,
   redirect
-})
+});
+
+export const logOut = () => ({
+  type: "LOG_OUT"
+});

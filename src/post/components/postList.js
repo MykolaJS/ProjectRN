@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Video from 'react-native-video';
 import {
   View,
   Text,
@@ -6,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import Share, { ShareSheet } from 'react-native-share';
 
 class PostList extends Component {
  
@@ -28,12 +30,24 @@ class PostList extends Component {
 
   _renderItem(item) {
     return (
-      <View style={{backgroundColor: "#fff", margin: 5, padding: 5}}>
-        <TouchableOpacity>
-          <Text>
-            userId - {item.userId}
-          </Text>
-        </TouchableOpacity>
+      <View style={{ backgroundColor: "#fff", margin: 5, padding: 5 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <TouchableOpacity>
+            <Text>
+              userId - {item.name}
+            </Text>
+          </TouchableOpacity>
+          { item.userId === this.props.currentUserId ?
+            <TouchableOpacity
+              onPress={() => this.props.deletePost(item._id)}
+            >
+              <Text>
+                Delete Post
+              </Text>
+            </TouchableOpacity>
+            : null
+          }
+          </View>
         <Text>
           {item.createAt}
         </Text>
@@ -43,6 +57,13 @@ class PostList extends Component {
         <Text>
           {item.body}
         </Text>
+        <Button
+          title="Shared"
+          onPress={() => Share.open({
+            title: item.title,
+            message: item.body,
+          })}
+        />
       </View>
     )
   }
@@ -53,12 +74,11 @@ class PostList extends Component {
     }
 
     const postList = [...this.props.posts.values()]; 
-    console.log(postList)
     return (
       <FlatList
         data={postList}
         renderItem={({ item }) => this._renderItem(item)}
-        keyExtractor={(item) => item._id }
+        keyExtractor={item => item._id }
         ListHeaderComponent={this.renderHeader()}
       />
     )
