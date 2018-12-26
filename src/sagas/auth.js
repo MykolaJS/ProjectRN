@@ -31,8 +31,10 @@ function* requestSignUpAsync(actions) {
     });
 
     yield put(requestSignUpSucceeded(data));
-  
+
+    yield actions.redirect("CheckEmail")
   } catch (error) {
+    alert("Error")
     yield put(requestSignUpError(error));
   }
 };
@@ -47,7 +49,12 @@ function* requestSignInAsync(actions) {
     const user = yield call(userApi.getCurrentUser, {
       token: token
     })
+
     yield put(requestSignInSucceeded(user, token));
+    if(user.blocked) {
+      alert("User Blocked!")
+      return null
+    }
 
     yield actions.redirect("PistList")
   } catch (error) {

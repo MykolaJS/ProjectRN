@@ -12,10 +12,11 @@ export const requestGetPostsError = error => ({
 	error
 });
 
-export const postCreate = (title, body) => ({
+export const postCreate = (title, body, redirect) => ({
 	type: "POST_CREATE",
 	title,
-	body
+	body,
+	redirect
 });
 
 export const deletePost = postId => ({

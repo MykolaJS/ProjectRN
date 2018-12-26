@@ -12,11 +12,12 @@ export const requestSignUpError = error => ({
   error
 });
 
-export const singUp = ({ email, password, name }) => ({
+export const singUp = ({ email, password, name }, redirect) => ({
   type: "SING_UP",
   email,
   password,
-  name
+  name,
+  redirect
 });
 
 export const requestSignIn = () => ({

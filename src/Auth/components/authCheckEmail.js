@@ -10,13 +10,15 @@ const CheckedEmail = props => {
       props.navigation.navigate(scene)
     }
     return (
-      <View>
-        <Text>
-          Great!
-        </Text>
-        <Text>
-          Checked Email Please
-        </Text>
+      <View style={{justifyContent: "space-between", flex: 1}}>
+        <View style={{justifyContent: "center", alignItems: "center", flex: .7 }}>
+          <Text style={{fontSize: 40}}>
+            Great!
+          </Text>
+          <Text style={{fontSize: 30}}>
+            Check Mail Please
+          </Text>
+        </View> 
         <Button
           title="Sign In"
           onPress={() => _redirectTo("AuthSignIn")}

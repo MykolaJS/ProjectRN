@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    singUp: args => dispatch(singUp(args)),
+    singUp: (args, redirect) => dispatch(singUp(args, redirect)),
   }
 }
 

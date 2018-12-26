@@ -16,6 +16,19 @@ class PostCreate extends Component {
     }
   }
 
+  _redirect = scene => {
+    this.props.navigation.navigate(scene)
+  }
+
+  createPost() {
+    const { body, title } = this.state;
+
+    if(title || body) {
+      this.props.postCreate(title, body, this._redirect.bind())
+    } else {
+      alert("Provide Data")
+    }
+  }
 
   render() {
     const { body, title } = this.state;
@@ -34,7 +47,7 @@ class PostCreate extends Component {
           onChangeText={body => this.setState({ body: body })}
         />  
         <Button
-          onPress={() => this.props.postCreate(title, body)}
+          onPress={() => this.createPost()}
           title="Create Post"
         />
       </View>

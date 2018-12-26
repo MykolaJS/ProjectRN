@@ -4,8 +4,6 @@ const initialState = {
   list: new Map()
 }
 
-
-
 describe("posts tests", () => {
   it("error in post", () => {
     const action =  {

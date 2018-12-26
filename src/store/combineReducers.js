@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import user from "../user/reducer";
 import post from "../post/reducer";
+import admin from "../admin/reducer";
 
 const appReducer = combineReducers({
 	user,
-	post
+	post,
+	admin
 });
 
 const rootReducer = (state, action) => (

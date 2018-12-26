@@ -9,7 +9,7 @@ const PostCreate = props => <PostCreateComponent {...props} />
 
 const mapDispatchToProps = dispatch => {
 	return {
-		postCreate: (title, body) => dispatch(postCreate(title, body))
+		postCreate: (title, body, redirect) => dispatch(postCreate(title, body, redirect))
 	}
 }
 

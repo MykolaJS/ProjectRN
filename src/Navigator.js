@@ -2,15 +2,19 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
 import OneSignal from 'react-native-onesignal'; 
+import { store } from "./store";
 
 import Auth from "./Auth/containers/auth";
 import AuthSignUp from "./Auth/containers/authSignUp";
 import AuthSignIn from "./Auth/containers/authSignIn";
 import AuthCkeckEmail from "./Auth/components/authCheckEmail";
-import LogOut from "./Auth/containers/logOut"
+import LogOut from "./Auth/containers/logOut";
+
+import UsersList from "./admin/containers/userList";
 
 import PistList from "./post/containers/postList";
 import PostCreate from "./post/containers/postCreate";
+
 
 class HomeScreen extends React.Component {
   render() {
@@ -26,8 +30,7 @@ class HomeScreen extends React.Component {
 
 class AppNavigator extends React.Component {
   constructor(properties) {
-    console.log(properties)
-  super(properties);
+    super(properties);
     OneSignal.init("3732f321-f09f-4b83-b524-d77567d9a98e");
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
@@ -55,22 +58,17 @@ class AppNavigator extends React.Component {
 const TabNavigator = createBottomTabNavigator({
     PostList: {
       screen: PistList,
-      navigationOptions: {
-      
-      }
     },
-    LogOut: LogOut,
-    MyPosts: HomeScreen
-  },
-
-);
+    ...(store.getState().user.user.isAdmin ? { Users: UsersList } : {}),
+    Menu: LogOut,
+  });
 
 
 const Navigator = createStackNavigator({
   Auth: {
     screen: Auth,
     navigationOptions: {
-      header: null
+      title: "PDP APLICATION"
     },
   },
   AuthSignUp: {
@@ -85,18 +83,18 @@ const Navigator = createStackNavigator({
       title: "Sign In"
     }
   },
-  CheckEmail: {
-    screen: AuthCkeckEmail,
-    navigationOptions: {
-      title: "CheckedEmail"
-    }
-  },
   PistList: {
     screen: TabNavigator,
     navigationOptions: {
       title: "Post List",
       headerLeft: null
     },
+  },
+  CheckEmail: {
+    screen: AuthCkeckEmail,
+    navigationOptions: {
+      title: "CheckedEmail"
+    }
   },
   PostCreate: {
     screen: PostCreate,

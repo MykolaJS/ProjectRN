@@ -5,6 +5,7 @@ import {
   takeLatest,
   select
 } from "redux-saga/effects";
+import { NavigationActions } from 'react-navigation'
 
 import {
  setPosts,
@@ -14,6 +15,7 @@ import {
 } from "../post/actions";
 
 import postApi from "../post/api";
+
 
 function* requestGetPostsAsync(actions) {
   try {
@@ -27,7 +29,6 @@ function* requestGetPostsAsync(actions) {
     const data = new Map();
    	response.forEach(item => data.set(item._id , item))
     yield put(setPosts(data));
- 
   } catch (error) {
     yield put(requestGetPostsError(error));
   }
@@ -45,6 +46,7 @@ function* postCreate(actions) {
     const data = new Map();
     data.set(response._id, response)  
     yield put(setPostInList(data));
+    yield actions.redirect("PistList")
  
   } catch (error) {
      console.log(error)

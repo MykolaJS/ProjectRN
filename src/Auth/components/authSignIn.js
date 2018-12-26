@@ -24,45 +24,51 @@ class SingUp extends Component {
   render() {
     return (
       <View style={{
-        justifyContent: "center",
+        justifyContent: "space-between",
         flex: 1
       }}>
-        <Text>
-          Email
-        </Text>
-        <TextInput
-          value={this.state.email} 
-          onChangeText={email => this.setState({ email: email })}
-        />
-        <Text>Password</Text>
-        <TextInput
-          value={this.state.password} 
-          onChangeText={password => this.setState({ password: password })}
-        />
-        { !this.props.user.loading ?
+        <View/>
+        <View>
+          <Text style={{fontSize: 20, padding: 10}}>
+            Email
+          </Text>
+          <TextInput
+            style={{backgroundColor: "#fff", fontSize: 20, height: 43 }}
+            value={this.state.email} 
+            onChangeText={email => this.setState({ email: email })}
+          />
+          <Text style={{fontSize: 20, padding: 10}}>Password</Text>
+          <TextInput
+            style={{backgroundColor: "#fff", fontSize: 20, height: 43 }}
+            value={this.state.password} 
+            onChangeText={password => this.setState({ password: password })}
+          />
+          <View style={{height: 50}}/>
+          <LoginButton
+            style={{padding: 15}}
+            onLoginFinished={
+              (error, result) => {
+                if (error) {
+                  console.log("login has error: " + error);
+                } else if (result.isCancelled) {
+                  console.log("login is cancelled.");
+                } else {
+                  AccessToken.getCurrentAccessToken().then(
+                    (data) => {
+                      console.log(data.accessToken.toString())
+                    }
+                  )
+                }
+              }
+            }
+            onLogoutFinished={() => console.log("logout.")}/>
+          </View>
+          { !this.props.user.loading ?
           <Button
             onPress={() => this.props.singIn(this.state, this._redirect.bind())}
             title="Sing In"
           /> :  <ActivityIndicator size="large" color="#0000ff" />
-        }
-        
-        <LoginButton
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("login has error: " + error);
-              } else if (result.isCancelled) {
-                console.log("login is cancelled.");
-              } else {
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    console.log(data.accessToken.toString())
-                  }
-                )
-              }
-            }
           }
-          onLogoutFinished={() => console.log("logout.")}/>
       </View>
     )
   }

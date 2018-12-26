@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  Button
+  Button,
+  Image
 } from "react-native";
 import OneSignal from 'react-native-onesignal'; 
 
@@ -20,13 +21,23 @@ class AuthMain extends Component {
 
     return (
       <View 
-      testID="welcome"
-      style={{
-        justifyContent: "center",
-        flex: 1
+        style={{
+          justifyContent: "space-between",
+          flex: 1
       }}>
-        <Button title="Sign In" onPress={() => _redirectTo("AuthSignIn")} />
-        <Button title="Sign Up" onPress={() => _redirectTo("AuthSignUp")} />
+        <View/>
+        <Image
+          style={{width: "100%", height: 100}}
+          source={{uri: "https://s.dou.ua/CACHE/images/img/static/companies/COAX_Logo_Updated_Logo_-_Exp_Normal/698e3db84ed02aca4e0e0c341db4cca1.png"}}
+        />
+        <View>
+          <Button
+            title="Sign In" 
+            onPress={() => _redirectTo("AuthSignIn")} />
+          <Button 
+            title="Sign Up" 
+            onPress={() => _redirectTo("AuthSignUp")} />
+        </View>
       </View>
     )
   }
