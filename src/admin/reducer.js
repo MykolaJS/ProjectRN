@@ -16,10 +16,24 @@ const admin = (state = initialState, action) => {
         })
       })
     }
+    case "TAKE_ADMIN": {
+      return Object.assign({}, state, {
+        users: state.users.set(action.userId, { 
+          ...state.users.get(action.userId), isAdmin: false
+        })
+      })
+    }
     case "BLOCK_USER": {
       return Object.assign({}, state, {
         users: state.users.set(action.userId, { 
           ...state.users.get(action.userId), blocked: true
+        })
+      })
+    }
+    case "UN_BLOCK_USER": {
+      return Object.assign({}, state, {
+        users: state.users.set(action.userId, { 
+          ...state.users.get(action.userId), blocked: false
         })
       })
     }

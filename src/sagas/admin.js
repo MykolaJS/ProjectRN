@@ -1,7 +1,6 @@
 import {
   call,
   put,
-  takeEvery,
   takeLatest,
   select
 } from "redux-saga/effects";
@@ -26,7 +25,6 @@ function* requestGetUsersAsync(actions) {
  
   } catch (error) {
     console.log(error)
-    //yield put(requestGetPostsError(error));
   }
 };
 
@@ -42,7 +40,6 @@ function* makeAdmin(actions) {
     
   } catch (error) {
     console.log(error)
-    //yield put(requestGetPostsError(error));
   }
 };
 
@@ -61,11 +58,43 @@ function* blockUser(actions) {
   }
 };
 
+function* unBlockUser(actions) {
+  try {
+    const state = yield select();
+    const { token } = state.user.user
+
+    const response = yield call(AdminApi.blockUser, {
+      token: token,
+      userId: actions.userId
+    });
+    
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+function* takeAdmin(actions) {
+  try {
+    const state = yield select();
+    const { token } = state.user.user
+
+    const response = yield call(AdminApi.blockUser, {
+      token: token,
+      userId: actions.userId
+    });
+    
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 
 function* adminSaga() {
-  yield takeEvery("GET_USERS", requestGetUsersAsync);
-  yield takeEvery("MAKE_ADMIN", makeAdmin);
-  yield takeEvery("BLOCK_USER", blockUser);
+  yield takeLatest("GET_USERS", requestGetUsersAsync);
+  yield takeLatest("MAKE_ADMIN", makeAdmin);
+  yield takeLatest("BLOCK_USER", blockUser);
+  yield takeLatest("TAKE_ADMIN", takeAdmin);
+  yield takeLatest("UN_BLOCK_USER", unBlockUser);
 };
 
 export default adminSaga;

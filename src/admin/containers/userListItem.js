@@ -3,7 +3,9 @@ import {connect} from "react-redux"
 
 import { 
 	blockUser,
-	makeAdmin
+	makeAdmin,
+	takeAdmin,
+	unBlockUser
 } from "../actions"
 import UserListItemComponent from "../components/userListItem";
 
@@ -20,6 +22,8 @@ const mapDispatchToProps = (dispatch, props) => {
 	return {
 		blockUser: () => dispatch(blockUser(props.userId)),
 		makeAdmin: () => dispatch(makeAdmin(props.userId)),
+		takeAdmin: () => dispatch(takeAdmin(props.userId)),
+		unBlockUser: () => dispatch(unBlockUser(props.userId)),
 	}
 }
 

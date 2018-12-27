@@ -10,14 +10,28 @@ import {
 
 class LogOut extends React.Component {
   render() {
-  	console.log(this.props)
+  	const {
+      logOut,
+      user,
+      navigation: {
+        navigate
+      }
+    } = this.props
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, justifyContent: "center"}}>
+        <Button
+          title="My Profile"
+          onPress={() => navigate("UserProfile")}
+        />
+        { user.isAdmin ? <Button
+          onPress={() => navigate("UsersList") }
+          title="User list"
+        /> : null }
         <Button 
         	title="Log Out"
         	onPress={() => { 
-        		this.props.logOut();
-        		this.props.navigation.navigate("Auth") 
+        		logOut();
+        		navigate("Auth"); 
         	}}
         />
       </View>

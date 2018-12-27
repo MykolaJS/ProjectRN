@@ -6,7 +6,12 @@ import {
   TextInput,
   ActivityIndicator
 } from "react-native";
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import {
+  LoginButton,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager
+} from "react-native-fbsdk";
 
 class SingUp extends Component {
   constructor() {
@@ -15,10 +20,23 @@ class SingUp extends Component {
       email: "admin@zdenka.net",
       password: "admin",
     }
+    this.requestManager = new GraphRequestManager()
   }
+   
 
   _redirect = scene => {
     this.props.navigation.navigate(scene)
+  }
+
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+      alert("Error fetching data: " + error.toString());
+    } else {
+      this.props.singIn({
+        name: result.name,
+        
+      }, this._redirect.bind())}
+      alert("Result Name: " + result.name);
   }
 
   render() {
@@ -44,24 +62,31 @@ class SingUp extends Component {
             onChangeText={password => this.setState({ password: password })}
           />
           <View style={{height: 50}}/>
-          <LoginButton
-            style={{padding: 15}}
-            onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  console.log("login has error: " + error);
-                } else if (result.isCancelled) {
-                  console.log("login is cancelled.");
-                } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      console.log(data.accessToken.toString())
-                    }
-                  )
+            <LoginButton
+              readPermissions={["public_profile"]}
+              onLoginFinished={
+                (error, result) => {
+                  if (error) {
+                    alert("login has error: " + result.error);
+                  } else if (result.isCancelled) {
+                    alert("login is cancelled.");
+                  } else {
+                    AccessToken.getCurrentAccessToken().then(
+                      (data) => {
+                        const infoRequest = new GraphRequest(
+                          "/me?fields=name,picture",
+                          null,
+                          this._responseInfoCallback
+                        );
+                        // Start the graph request.
+                        new GraphRequestManager().addRequest(infoRequest).start();
+                      }
+                    )
+                  }
                 }
               }
-            }
-            onLogoutFinished={() => console.log("logout.")}/>
+              onLogoutFinished={() => alert("logout.")}
+            />
           </View>
           { !this.props.user.loading ?
           <Button

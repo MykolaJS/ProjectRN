@@ -11,6 +11,20 @@ class UserListItem extends Component {
  
 
   render() {
+    const {
+      name,
+      email,
+      isAdmin,
+      blocked,
+      isVerified
+    } = this.props.user;
+    const {
+      unBlockUser,
+      blockUser,
+      makeAdmin,
+      takeAdmin
+    } = this.props;
+
     return (
       <View style={{ backgroundColor: "#fff", margin: 5, padding: 10, flexDirection: "row", flex: 1}}>
         <View style={{flex: 1}}>
@@ -18,29 +32,29 @@ class UserListItem extends Component {
             User Details
           </Text>
           <Text>
-            name - {this.props.user.name ? this.props.user.name : "No name"}
+            name - {name ? name : "No name"}
           </Text>
           <Text>
-            Email - {this.props.user.email}
+            Email - {email}
           </Text>
           <Text>
-            Role - {this.props.user.isAdmin ? "Admin" : "User"}
+            Role - {isAdmin ? "Admin" : "User"}
           </Text>
           <Text>
-            Blocked - {this.props.user.blocked ? "Yes" : "No"}
+            Blocked - {blocked ? "Yes" : "No"}
           </Text>
           <Text>
-            Verified - {this.props.user.isVerified ? "Yes" : "No"}
+            Verified - {isVerified ? "Yes" : "No"}
           </Text>
         </View>
         <View style={{justifyContent: "space-around"}}>
           <Button
-            onPress={this.props.makeAdmin}
-            title={this.props.user.isAdmin ? "Take Admin" : "Make Admin"}
+            onPress={isAdmin ? takeAdmin : makeAdmin }
+            title={isAdmin ? "Take Admin" : "Make Admin"}
           />
           <Button
-            onPress={this.props.blockUser}
-            title={this.props.user.blocked ?  "un block" : "block"}
+            onPress={blocked ? unBlockUser : blockUser}
+            title={blocked ?  "un block" : "block"}
           />
         </View>
       </View>

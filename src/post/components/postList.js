@@ -58,7 +58,7 @@ class PostList extends Component {
           {item.body}
         </Text>
         <Button
-          title="Shared"
+          title="Share"
           onPress={() => Share.open({
             title: item.title,
             message: item.body,

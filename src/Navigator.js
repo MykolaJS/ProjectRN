@@ -15,6 +15,8 @@ import UsersList from "./admin/containers/userList";
 import PistList from "./post/containers/postList";
 import PostCreate from "./post/containers/postCreate";
 
+import UserProfile from "./user/containers/userProfile";
+
 
 class HomeScreen extends React.Component {
   render() {
@@ -102,6 +104,18 @@ const Navigator = createStackNavigator({
       title: "Post Create"
     },
   },
+  UsersList: {
+    screen: UsersList,
+    navigationOptions: {
+      title: "Admin Panel"
+    }
+  },
+  UserProfile: {
+    screen: UserProfile,
+    navigationOptions: {
+      title: "User Info"
+    }
+  }  
 });
 
 export default AppNavigator;

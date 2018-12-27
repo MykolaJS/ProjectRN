@@ -5,6 +5,11 @@ import { logOut } from "../../user/actions";
 
 const LogOut = props => <LogOutComponent {...props} />
 
+const mapStateToProps = store => {
+  return {
+    user: store.user.user
+  }
+} 
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -12,4 +17,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LogOut);
+export default connect(mapStateToProps, mapDispatchToProps)(LogOut);

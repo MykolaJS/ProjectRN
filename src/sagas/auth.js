@@ -12,11 +12,9 @@ import {
   requestSignUp,
   requestSignUpSucceeded,
   requestSignUpError,
-  singUp,
   requestSignIn,
   requestSignInSucceeded,
   requestSignInError,
-  singIn,
 } from "../user/actions";
 
 import userApi from "../user/api";
