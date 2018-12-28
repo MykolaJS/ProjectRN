@@ -9,7 +9,7 @@ import OneSignal from 'react-native-onesignal';
 
 class AuthMain extends Component {
   componentDidMount() {
-    if(Object.keys(this.props.state.user).length) {
+    if(Object.keys(this.props.state.user).length && !this.props.state.user.blocked ) {
       this.props.navigation.navigate("PostList")
     }
   }

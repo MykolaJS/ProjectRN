@@ -32,11 +32,13 @@ class SingUp extends Component {
     if (error) {
       alert("Error fetching data: " + error.toString());
     } else {
-      this.props.singIn({
+      console.log(result)
+      this.props.singInFacebook({
         name: result.name,
-        
-      }, this._redirect.bind())}
-      alert("Result Name: " + result.name);
+        socialId: result.id,
+        image: result.picture.data.url
+      }, this._redirect.bind())  
+    }
   }
 
   render() {

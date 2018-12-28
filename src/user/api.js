@@ -34,6 +34,22 @@ export default class UserApi {
     return fetchURL(request)
   }
 
+  static singInFacebook(args) {
+    const request = new Request(`${server}/api/singInFacebook`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "name": args.name,
+        "socialId": args.socialId,
+        "image": args.image
+      })
+    });
+    
+    return fetchURL(request)
+  }
+
   static getCurrentUser(args) {
     const request = new Request(`${server}/api/current-user`, {
       method: "GET",

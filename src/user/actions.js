@@ -42,6 +42,14 @@ export const singIn = ({ email, password }, redirect) => ({
   redirect
 });
 
+export const singInFacebook = ({ name, socialId, image }, redirect) => ({
+  type: "SING_IN_FACEBOOK",
+  name,
+  socialId, 
+  image,
+  redirect
+});
+
 export const logOut = () => ({
   type: "LOG_OUT"
 });

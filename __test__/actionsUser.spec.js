@@ -7,6 +7,7 @@ import {
  requestSignInSucceeded,
  requestSignInError,
  singIn,
+ singInFacebook
 } from "../src/user/actions";
 
 describe("action creators", () => {
@@ -32,7 +33,7 @@ describe("action creators", () => {
 		})
 	});
 
-	it("sign in", () => {
+	it("sign un", () => {
 		const data = {
 			name: "Mykola",
 			email:"sdfa",
@@ -79,6 +80,23 @@ describe("action creators", () => {
   			password: data.password,
 			redirect: redirect
 			
+		});
+	});
+
+	it("sign in facebook ", () => {
+		const data = {
+			name: "dfs",
+  			socialId: "1212",
+  			image: "sdf"
+		};
+		const redirect = () => null;
+
+		expect(singInFacebook(data, redirect)).toEqual({
+			type: "SING_IN_FACEBOOK",
+			name: data.name,
+  			socialId: data.socialId,
+  			image: data.image,
+			redirect: redirect
 		});
 	});
 
