@@ -30,7 +30,20 @@ describe("admin reducer", () => {
       }))
   });
 
- it("make admin", () => {
+  it("take admin", () => {
+    const action =  {
+      type: "TAKE_ADMIN",
+      userId: 1
+    }
+
+    expect(reducer(initialState, action)).toEqual(Object.assign({}, initialState, {
+        users: initialState.users.set(action.userId, { 
+          ...initialState.users.get(action.userId), isAdmin: false
+        })
+      }))
+  })
+
+ it("block user", () => {
     const action =  {
       type: "BLOCK_USER",
       userId: 1
@@ -42,5 +55,19 @@ describe("admin reducer", () => {
         })
       }))
   });
+
+  it("un block user", () => {
+    const action =  {
+      type: "UN_BLOCK_USER",
+      userId: 1
+    }
+
+    expect(reducer(initialState, action)).toEqual(Object.assign({}, initialState, {
+        users: initialState.users.set(action.userId, { 
+          ...initialState.users.get(action.userId), blocked: false
+        })
+      }))
+  });
+
 
 })

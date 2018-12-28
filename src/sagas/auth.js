@@ -40,6 +40,7 @@ function* requestSignUpAsync(actions) {
 
 function* requestSignInAsync(actions) {
   try {
+    yield put(requestSignIn());
     const token = yield call(userApi.singIn, {
       password: actions.password,
       email: actions.email,
